@@ -273,13 +273,13 @@ function openSupplierModal(id = null) {
     document.getElementById("supDebit").value = item.debit;
     document.getElementById("supCredit").value = item.credit;
     
-    document.getElementById("supplierModalTitle").innerText = "تعديل طلب توريد";
+    document.getElementById("supplierModalTitle").innerText = "تعديل فاتورة مورد";
     document.getElementById("supplierFormBtn").innerText = "تعديل البيانات";
   } else {
     document.getElementById("supplierId").value = "";
     document.getElementById("supCode").value = "مد - " + (state.suppliers.length + 1);
-    document.getElementById("supplierModalTitle").innerText = "إضافة طلب توريد";
-    document.getElementById("supplierFormBtn").innerText = "إضافة طلب";
+    document.getElementById("supplierModalTitle").innerText = "إضافة فاتورة مورد";
+    document.getElementById("supplierFormBtn").innerText = "إضافة فاتورة";
   }
   
   openModal("supplierModal");
@@ -842,7 +842,7 @@ function exportAllToExcel() {
   }
 
   addCleanSheet('supplierTable', 'مصروفات الموردين');
-  addCleanSheet('contractorTable', 'مصروفات المقاولين');
+  addCleanSheet('contractorTable', 'مستخلصات المقاولين');
   addCleanSheet('employeeTable', 'رواتب العاملين');
 
   XLSX.writeFile(wb, 'تقرير_إدارة_المقاولات_الشامل.xlsx');
@@ -875,7 +875,7 @@ function initCharts() {
   barChart = new Chart(ctxBar, {
     type: "bar",
     data: {
-      labels: ["مصروفات الموردين", "مصروفات المقاولين", "رواتب العاملين"],
+      labels: ["مصروفات الموردين", "مستخلصات المقاولين", "رواتب العاملين"],
       datasets: [
         {
           label: "الميزانية التقديرية",
@@ -923,7 +923,7 @@ function initCharts() {
   pieChart = new Chart(ctxPie, {
     type: "doughnut",
     data: {
-      labels: ["مصروفات الموردين", "مصروفات المقاولين", "رواتب العاملين"],
+      labels: ["مصروفات الموردين", "مستخلصات المقاولين", "رواتب العاملين"],
       datasets: [{
         data: [0, 0, 0],
         backgroundColor: [
@@ -979,11 +979,11 @@ function closeModal(id) {
 }
 
 function formatCurrency(num) {
-  return formatNumber(num) + " ج.م";
+  return formatNumber(num) + " ر.س";
 }
 
 function formatNumber(num) {
-  return Number(num).toLocaleString("ar-EG", {
+  return Number(num).toLocaleString("ar-SA", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2
   });

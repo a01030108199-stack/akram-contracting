@@ -540,6 +540,16 @@ header {
   transition: var(--transition);
 }
 
+.select-control option {
+  background: #151e2e;
+  color: var(--text-main);
+}
+
+[data-theme="light"] .select-control option {
+  background: #ffffff;
+  color: #000000;
+}
+
 [data-theme="light"] .select-control {
   background: rgba(255, 255, 255, 0.8);
 }

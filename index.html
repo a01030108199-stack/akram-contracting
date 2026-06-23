@@ -71,7 +71,7 @@
           <a href="#"><i class="fa-solid fa-truck-loading"></i><span>مصروفات الموردين</span></a>
         </li>
         <li class="nav-item" data-tab="contractors">
-          <a href="#"><i class="fa-solid fa-hard-hat"></i><span>مصروفات المقاولين</span></a>
+          <a href="#"><i class="fa-solid fa-hard-hat"></i><span>مستخلصات المقاولين</span></a>
         </li>
         <li class="nav-item" data-tab="employees">
           <a href="#"><i class="fa-solid fa-users"></i><span>رواتب العاملين</span></a>
@@ -193,7 +193,7 @@
             <p>إدارة وتوثيق طلبات التوريد، المدفوعات والديون الخاصة بالموردين</p>
           </div>
           <div class="header-actions">
-            <button class="btn btn-primary" onclick="openSupplierModal()"><i class="fa-solid fa-plus"></i> إضافة طلب توريد</button>
+            <button class="btn btn-primary" onclick="openSupplierModal()"><i class="fa-solid fa-plus"></i> إضافة فاتورة مورد</button>
           </div>
         </header>
         
@@ -249,7 +249,7 @@
       <section id="contractors" class="app-section">
         <header>
           <div class="page-title">
-            <h2>مصروفات مقاولي الباطن</h2>
+            <h2>مستخلصات مقاولي الباطن</h2>
             <p>إدارة الدفعات والمستخلصات والأعمال المنجزة بواسطة المقاولين</p>
           </div>
           <div class="header-actions">
@@ -510,7 +510,7 @@
               <input type="number" step="any" class="form-control" id="inputSupplierBudget" required>
             </div>
             <div class="form-group">
-              <label for="inputContractorBudget">ميزانية مصروفات المقاولين التقديرية</label>
+              <label for="inputContractorBudget">ميزانية مستخلصات المقاولين التقديرية</label>
               <input type="number" step="any" class="form-control" id="inputContractorBudget" required>
             </div>
             <div class="form-group full-width">
@@ -531,7 +531,7 @@
   <div class="modal-overlay" id="supplierModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 id="supplierModalTitle">إضافة طلب توريد</h3>
+        <h3 id="supplierModalTitle">إضافة فاتورة مورد</h3>
         <button class="close-modal-btn" onclick="closeModal('supplierModal')">&times;</button>
       </div>
       <div class="modal-body">
