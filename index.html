@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام إدارة المقاولات الذكي</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#00b4a0">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- SheetJS (XLSX) CDN for Excel Export -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo-section">
+        <div class="logo-container">
+          <img src="logo.jpg" alt="Masoun Logo" class="logo-image">
+        </div>
+        <div class="logo-text">
+          <h1>مصون - Masoun</h1>
+          <p>لوحة التحكم الذكية v1.0</p>
+        </div>
+      </div>
+      
+      <ul class="nav-links">
+        <li class="nav-item active" data-tab="dashboard">
+          <a href="#"><i class="fa-solid fa-chart-line"></i><span>اللوحة الرئيسية</span></a>
+        </li>
+        <li class="nav-item" data-tab="suppliers">
+          <a href="#"><i class="fa-solid fa-truck-loading"></i><span>مصروفات الموردين</span></a>
+        </li>
+        <li class="nav-item" data-tab="contractors">
+          <a href="#"><i class="fa-solid fa-hard-hat"></i><span>مصروفات المقاولين</span></a>
+        </li>
+        <li class="nav-item" data-tab="employees">
+          <a href="#"><i class="fa-solid fa-users"></i><span>رواتب العاملين</span></a>
+        </li>
+        <li class="nav-item" data-tab="statement">
+          <a href="#"><i class="fa-solid fa-file-invoice-dollar"></i><span>كشف حساب تحليلي</span></a>
+        </li>
+        <li class="nav-item" data-tab="datacenter">
+          <a href="#"><i class="fa-solid fa-database"></i><span>إدارة البيانات</span></a>
+        </li>
+      </ul>
+      
+      <div class="sidebar-footer">
+        <div class="creator-card">
+          <div class="creator-icon"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="creator-info">
+            <span class="creator-label">المدير المالي للمشروع</span>
+            <span class="creator-name">د. حسام الدين كامل</span>
+          </div>
+        </div>
+        <div class="creator-card">
+          <div class="creator-icon"><i class="fa-solid fa-user-gear"></i></div>
+          <div class="creator-info">
+            <span class="creator-label">تصميم وإشراف</span>
+            <span class="creator-name">أكرم سعد</span>
+            <span class="creator-title">باحث دكتوراه ومحلل بيانات</span>
+          </div>
+        </div>
+        <button class="theme-toggle-btn" id="themeToggleBtn">
+          <i class="fa-solid fa-moon"></i><span>الوضع الداكن</span>
+        </button>
+      </div>
+    </aside>
+    
+    <!-- Main Content Panel -->
+    <main class="main-content">
+      
+      <!-- ============================================== -->
+      <!-- SECTION: DASHBOARD -->
+      <!-- ============================================== -->
+      <section id="dashboard" class="app-section active">
+        <header>
+          <div class="page-title">
+            <h2>اللوحة الرئيسية للتحليل والماليات</h2>
+            <p>متابعة تفصيلية للميزانيات والمصروفات والتدفق النقدي للمشروع</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" onclick="openBudgetModal()"><i class="fa-solid fa-cog"></i> تعديل ميزانيات البنود</button>
+          </div>
+        </header>
+        
+        <!-- KPI Cards Grid -->
+        <div class="dashboard-grid">
+          <div class="glass-card kpi-card primary-border">
+            <div class="kpi-info">
+              <span class="kpi-label">قيمة عقد المشروع</span>
+              <span class="kpi-value" id="kpiContractValue">0.00</span>
+            </div>
+            <div class="kpi-icon"><i class="fa-solid fa-file-signature"></i></div>
+          </div>
+          <div class="glass-card kpi-card secondary-kpi secondary-border">
+            <div class="kpi-info">
+              <span class="kpi-label">الميزانية التقديرية الكلية</span>
+              <span class="kpi-value" id="kpiTotalBudget">0.00</span>
+            </div>
+            <div class="kpi-icon"><i class="fa-solid fa-calculator"></i></div>
+          </div>
+          <div class="glass-card kpi-card success-kpi success-border">
+            <div class="kpi-info">
+              <span class="kpi-label">إجمالي المنصرف الفعلي</span>
+              <span class="kpi-value" id="kpiActualSpent">0.00</span>
+            </div>
+            <div class="kpi-icon"><i class="fa-solid fa-coins"></i></div>
+          </div>
+          <div class="glass-card kpi-card danger-kpi danger-border">
+            <div class="kpi-info">
+              <span class="kpi-label">الانحراف / المتبقي بالميزانية</span>
+              <span class="kpi-value" id="kpiVariance">0.00</span>
+            </div>
+            <div class="kpi-icon" id="varianceIcon"><i class="fa-solid fa-arrow-trend-down"></i></div>
+          </div>
+          <div class="glass-card kpi-card warning-kpi warning-border">
+            <div class="kpi-info">
+              <span class="kpi-label">المتبقي السائل من قيمة العقد</span>
+              <span class="kpi-value" id="kpiLiquidRemaining">0.00</span>
+            </div>
+            <div class="kpi-icon" id="liquidIcon"><i class="fa-solid fa-hand-holding-usd"></i></div>
+          </div>
+        </div>
+        
+        <!-- Charts Section -->
+        <div class="charts-grid">
+          <div class="glass-card">
+            <div class="chart-header">
+              <span class="chart-title">مقارنة الميزانية التقديرية والمنصرف الفعلي لكل بند</span>
+            </div>
+            <div class="chart-canvas-container">
+              <canvas id="barChart"></canvas>
+            </div>
+          </div>
+          <div class="glass-card">
+            <div class="chart-header">
+              <span class="chart-title">توزيع المصروفات الفعلية</span>
+            </div>
+            <div class="chart-canvas-container">
+              <canvas id="pieChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ============================================== -->
+      <!-- SECTION: SUPPLIER EXPENSES -->
+      <!-- ============================================== -->
+      <section id="suppliers" class="app-section">
+        <header>
+          <div class="page-title">
+            <h2>مصروفات الموردين (المستلم)</h2>
+            <p>إدارة وتوثيق طلبات التوريد، المدفوعات والديون الخاصة بالموردين</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" onclick="openSupplierModal()"><i class="fa-solid fa-plus"></i> إضافة طلب توريد</button>
+          </div>
+        </header>
+        
+        <div class="glass-card data-card">
+          <div class="card-header-actions">
+            <div class="search-filter-wrapper">
+              <div class="search-input-wrapper">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" class="form-control" id="searchSupplier" placeholder="البحث باسم المورد أو الشركة أو الخامات...">
+              </div>
+              <select class="select-control" id="filterSupplierStatus">
+                <option value="">كل الحالات</option>
+                <option value="مستلمة">مستلمة</option>
+                <option value="قيد الانتظار">قيد الانتظار</option>
+                <option value="مرفوضة">مرفوضة</option>
+              </select>
+            </div>
+            <button class="btn btn-secondary" onclick="exportTableToExcel('supplierTable', 'مصروفات_الموردين')">
+              <i class="fa-solid fa-file-excel"></i> تصدير Excel
+            </button>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="custom-table" id="supplierTable">
+              <thead>
+                <tr>
+                  <th>كود المورد</th>
+                  <th>اسم المورد (المستلم)</th>
+                  <th>الشركة</th>
+                  <th>الخامات / المعدات</th>
+                  <th>حالة الطلبية</th>
+                  <th>المدين (دفعة مسلَّمة)</th>
+                  <th>الدائن (مستحقات معلقة)</th>
+                  <th>الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="supplierTableBody">
+                <!-- Dynamic Content -->
+              </tbody>
+              <tfoot>
+                <tr class="table-summary-row" id="supplierTableSummary">
+                  <!-- Dynamic Summary Row -->
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ============================================== -->
+      <!-- SECTION: CONTRACTOR EXPENSES -->
+      <!-- ============================================== -->
+      <section id="contractors" class="app-section">
+        <header>
+          <div class="page-title">
+            <h2>مصروفات مقاولي الباطن</h2>
+            <p>إدارة الدفعات والمستخلصات والأعمال المنجزة بواسطة المقاولين</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" onclick="openContractorModal()"><i class="fa-solid fa-plus"></i> إضافة مستخلص</button>
+          </div>
+        </header>
+        
+        <div class="glass-card data-card">
+          <div class="card-header-actions">
+            <div class="search-filter-wrapper">
+              <div class="search-input-wrapper">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" class="form-control" id="searchContractor" placeholder="البحث باسم المقاول، الشركة أو المهمة...">
+              </div>
+              <select class="select-control" id="filterContractorStatus">
+                <option value="">كل الحالات</option>
+                <option value="مستلم">مستلم</option>
+                <option value="قيد الانتظار">قيد الانتظار</option>
+                <option value="مرفوض">مرفوض</option>
+              </select>
+            </div>
+            <button class="btn btn-secondary" onclick="exportTableToExcel('contractorTable', 'مصروفات_المقاولين')">
+              <i class="fa-solid fa-file-excel"></i> تصدير Excel
+            </button>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="custom-table" id="contractorTable">
+              <thead>
+                <tr>
+                  <th>كود المقاول</th>
+                  <th>اسم المقاول (المستلم)</th>
+                  <th>الشركة</th>
+                  <th>المهمة / الخدمة</th>
+                  <th>رقم المستخلص</th>
+                  <th>حالة المستخلص</th>
+                  <th>المدين (مسدد)</th>
+                  <th>الدائن (متبقٍ)</th>
+                  <th>إجمالي المستخلص</th>
+                  <th>الشهر</th>
+                  <th>السنة</th>
+                  <th>الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="contractorTableBody">
+                <!-- Dynamic Content -->
+              </tbody>
+              <tfoot>
+                <tr class="table-summary-row" id="contractorTableSummary">
+                  <!-- Dynamic Summary Row -->
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ============================================== -->
+      <!-- SECTION: EMPLOYEE SALARIES -->
+      <!-- ============================================== -->
+      <section id="employees" class="app-section">
+        <header>
+          <div class="page-title">
+            <h2>رواتب وأجور العاملين</h2>
+            <p>جدول كشف المرتبات، البدلات، الخصومات والمكافآت الشهرية للموظفين</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" onclick="openEmployeeModal()"><i class="fa-solid fa-plus"></i> إضافة موظف</button>
+          </div>
+        </header>
+        
+        <div class="glass-card data-card">
+          <div class="card-header-actions">
+            <div class="search-filter-wrapper">
+              <div class="search-input-wrapper">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" class="form-control" id="searchEmployee" placeholder="البحث باسم الموظف أو الوظيفة...">
+              </div>
+              <select class="select-control" id="filterEmployeeMonth">
+                <option value="">كل الشهور</option>
+                <option value="يناير">يناير</option>
+                <option value="فبراير">فبراير</option>
+                <option value="مارس">مارس</option>
+                <option value="أبريل">أبريل</option>
+                <option value="مايو">مايو</option>
+                <option value="يونيو">يونيو</option>
+                <option value="يوليو">يوليو</option>
+                <option value="أغسطس">أغسطس</option>
+                <option value="سبتمبر">سبتمبر</option>
+                <option value="أكتوبر">أكتوبر</option>
+                <option value="نوفمبر">نوفمبر</option>
+                <option value="ديسمبر">ديسمبر</option>
+              </select>
+            </div>
+            <button class="btn btn-secondary" onclick="exportTableToExcel('employeeTable', 'رواتب_العاملين')">
+              <i class="fa-solid fa-file-excel"></i> تصدير Excel
+            </button>
+          </div>
+          
+          <div class="table-responsive">
+            <table class="custom-table" id="employeeTable">
+              <thead>
+                <tr>
+                  <th>كود الموظف</th>
+                  <th>اسم الموظف</th>
+                  <th>الوظيفة</th>
+                  <th>الراتب الصافي</th>
+                  <th>بدلات (إن وجدت)</th>
+                  <th>خصومات</th>
+                  <th>إضافي (علاوات/مكافآت)</th>
+                  <th>إجمالي المصروف الفعلي</th>
+                  <th>الشهر</th>
+                  <th>السنة</th>
+                  <th>الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="employeeTableBody">
+                <!-- Dynamic Content -->
+              </tbody>
+              <tfoot>
+                <tr class="table-summary-row" id="employeeTableSummary">
+                  <!-- Dynamic Summary Row -->
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
+      
+      <!-- ============================================== -->
+      <!-- SECTION: STATEMENT (ANALYTICAL ACCOUNT) -->
+      <!-- ============================================== -->
+      <section id="statement" class="app-section">
+        <header>
+          <div class="page-title">
+            <h2>كشف حساب تحليلي تفصيلي</h2>
+            <p>اختر اسم مورد أو مقاول لعرض تقرير مالي شامل بكافة معاملاته المباشرة</p>
+          </div>
+        </header>
+        
+        <div class="glass-card data-card">
+          <div style="max-width: 400px; margin-bottom: 1.5rem;">
+            <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">اختر المورد أو المقاول:</label>
+            <select class="select-control form-control" id="statementSelect" style="padding: 10px 15px;" onchange="loadStatement()">
+              <option value="">-- اختر اسماً من القائمة --</option>
+            </select>
+          </div>
+          
+          <div id="statementResultContainer" class="statement-box" style="display: none;">
+            <div class="statement-meta">
+              <div class="meta-item">
+                <span class="meta-label">نوع الحساب</span>
+                <span class="meta-val" id="statementType">-</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">الشركة المرتبطة</span>
+                <span class="meta-val" id="statementCompany">-</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">إجمالي المدين (المدفوع له)</span>
+                <span class="meta-val" id="statementTotalDebit">0.00</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">إجمالي الدائن (المستحقات المعلقة)</span>
+                <span class="meta-val" id="statementTotalCredit">0.00</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">إجمالي قيمة المستحقات</span>
+                <span class="meta-val" id="statementTotalDues" style="color: var(--primary); font-weight: 800;">0.00</span>
+              </div>
+            </div>
+            
+            <div class="table-responsive">
+              <table class="custom-table" id="statementTable">
+                <thead>
+                  <tr>
+                    <th>كود العملية</th>
+                    <th>التفاصيل / البيان</th>
+                    <th>حالة الطلبية/المستخلص</th>
+                    <th>المدين (مدفوع له)</th>
+                    <th>الدائن (مستحق معلق)</th>
+                    <th>التاريخ / الفترة</th>
+                  </tr>
+                </thead>
+                <tbody id="statementTableBody">
+                  <!-- Dynamic Content -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <div id="statementPlaceholder" style="text-align: center; padding: 3rem; color: var(--text-muted);">
+            <i class="fa-solid fa-folder-open" style="font-size: 3rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
+            يرجى اختيار اسم لعرض كشف الحساب التحليلي
+          </div>
+        </div>
+      </section>
+      
+      <!-- ============================================== -->
+      <!-- SECTION: DATA CENTER / SETTINGS -->
+      <!-- ============================================== -->
+      <section id="datacenter" class="app-section">
+        <header>
+          <div class="page-title">
+            <h2>إدارة البيانات والنظام</h2>
+            <p>تصدير واستيراد قواعد البيانات وأخذ نسخ احتياطية للمحافظة على بياناتك</p>
+          </div>
+        </header>
+        
+        <div class="settings-grid">
+          <div class="glass-card settings-card">
+            <h3><i class="fa-solid fa-download" style="color: var(--primary); margin-left: 8px;"></i> النسخ الاحتياطي وتصدير البيانات</h3>
+            <p>قم بتنزيل كافة بيانات المشروع الحالية كملف JSON مشفر للرجوع إليه وتأمين معلوماتك في أي وقت.</p>
+            <div class="flex-buttons">
+              <button class="btn btn-primary" onclick="exportDataJSON()"><i class="fa-solid fa-file-code"></i> تصدير البيانات (JSON)</button>
+              <button class="btn btn-secondary" onclick="exportAllToExcel()"><i class="fa-solid fa-file-excel"></i> تصدير كل الجداول لملف Excel واحد</button>
+            </div>
+          </div>
+          
+          <div class="glass-card settings-card">
+            <h3><i class="fa-solid fa-upload" style="color: var(--secondary); margin-left: 8px;"></i> استعادة البيانات المستوردة</h3>
+            <p>قم برفع ملف النسخة الاحتياطية (JSON) المستخرج سابقاً لاستعادة البيانات وحفظها في المتصفح.</p>
+            <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importDataJSON(event)">
+            <button class="btn btn-secondary" onclick="document.getElementById('importFileInput').click()"><i class="fa-solid fa-upload"></i> اختيار ملف JSON واستيراده</button>
+          </div>
+          
+          <div class="glass-card settings-card danger-border">
+            <h3 style="color: var(--danger);"><i class="fa-solid fa-exclamation-triangle" style="margin-left: 8px;"></i> منطقة الخطر وإعادة التعيين</h3>
+            <p>سيؤدي هذا الإجراء إلى مسح كافة البيانات والتغييرات المضافة بشكل كامل وإعادة تعيين النظام للبيانات الافتراضية الأصلية المأخوذة من جداول الإكسل.</p>
+            <button class="btn btn-danger" onclick="resetSystemData()"><i class="fa-solid fa-trash-alt"></i> إعادة تعيين النظام للبيانات الافتراضية</button>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+  
+  <!-- ============================================== -->
+  <!-- MODALS SECTION -->
+  <!-- ============================================== -->
+  
+  <!-- MODAL: Budget Config -->
+  <div class="modal-overlay" id="budgetModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>تعديل الميزانيات التقديرية وقيمة العقد</h3>
+        <button class="close-modal-btn" onclick="closeModal('budgetModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="budgetForm" onsubmit="saveBudgets(event)">
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="inputContractValue">قيمة عقد المشروع بالكامل</label>
+              <input type="number" step="any" class="form-control" id="inputContractValue" required>
+            </div>
+            <div class="form-group">
+              <label for="inputSupplierBudget">ميزانية مصروفات الموردين التقديرية</label>
+              <input type="number" step="any" class="form-control" id="inputSupplierBudget" required>
+            </div>
+            <div class="form-group">
+              <label for="inputContractorBudget">ميزانية مصروفات المقاولين التقديرية</label>
+              <input type="number" step="any" class="form-control" id="inputContractorBudget" required>
+            </div>
+            <div class="form-group full-width">
+              <label for="inputEmployeeBudget">ميزانية رواتب الموظفين التقديرية</label>
+              <input type="number" step="any" class="form-control" id="inputEmployeeBudget" required>
+            </div>
+          </div>
+          <div class="modal-footer" style="padding-right:0; padding-left:0; margin-top: 20px;">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('budgetModal')">إلغاء</button>
+            <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Supplier Edit/Add -->
+  <div class="modal-overlay" id="supplierModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="supplierModalTitle">إضافة طلب توريد</h3>
+        <button class="close-modal-btn" onclick="closeModal('supplierModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="supplierForm" onsubmit="saveSupplier(event)">
+          <input type="hidden" id="supplierId">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="supCode">كود المورد</label>
+              <input type="text" class="form-control" id="supCode" placeholder="مثال: مد - 11" required>
+            </div>
+            <div class="form-group">
+              <label for="supName">اسم المورد (المستلم)</label>
+              <input type="text" class="form-control" id="supName" placeholder="اسم المستلم الفعلي" required>
+            </div>
+            <div class="form-group">
+              <label for="supCompany">الشركة</label>
+              <input type="text" class="form-control" id="supCompany" placeholder="اسم الشركة الموردة" required>
+            </div>
+            <div class="form-group">
+              <label for="supItem">الخامات / المعدات</label>
+              <input type="text" class="form-control" id="supItem" placeholder="حديد، رمل، معدات..." required>
+            </div>
+            <div class="form-group">
+              <label for="supStatus">حالة الطلبية</label>
+              <select class="select-control form-control" id="supStatus" required>
+                <option value="مستلمة">مستلمة</option>
+                <option value="قيد الانتظار">قيد الانتظار</option>
+                <option value="مرفوضة">مرفوضة</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="supDebit">المدين (الدفعة المسلَّمة نقداً)</label>
+              <input type="number" step="any" class="form-control" id="supDebit" value="0" required>
+            </div>
+            <div class="form-group">
+              <label for="supCredit">الدائن (المستحقات المعلقة)</label>
+              <input type="number" step="any" class="form-control" id="supCredit" value="0" required>
+            </div>
+          </div>
+          <div class="modal-footer" style="padding-right:0; padding-left:0; margin-top: 20px;">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('supplierModal')">إلغاء</button>
+            <button type="submit" class="btn btn-primary" id="supplierFormBtn">حفظ البيانات</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Contractor Edit/Add -->
+  <div class="modal-overlay" id="contractorModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="contractorModalTitle">إضافة مستخلص مقاول</h3>
+        <button class="close-modal-btn" onclick="closeModal('contractorModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="contractorForm" onsubmit="saveContractor(event)">
+          <input type="hidden" id="contractorId">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="conCode">كود المقاول</label>
+              <input type="text" class="form-control" id="conCode" placeholder="مثال: مل - 11" required>
+            </div>
+            <div class="form-group">
+              <label for="conName">اسم المقاول (المستلم)</label>
+              <input type="text" class="form-control" id="conName" placeholder="اسم المستلم الفعلي" required>
+            </div>
+            <div class="form-group">
+              <label for="conCompany">الشركة</label>
+              <input type="text" class="form-control" id="conCompany" placeholder="اسم شركة المقاولات" required>
+            </div>
+            <div class="form-group">
+              <label for="conTask">المهمة / الخدمة</label>
+              <input type="text" class="form-control" id="conTask" placeholder="حفر، صب خرسانات..." required>
+            </div>
+            <div class="form-group">
+              <label for="conInvoiceNum">رقم المستخلص</label>
+              <input type="text" class="form-control" id="conInvoiceNum" placeholder="مثال: 101" required>
+            </div>
+            <div class="form-group">
+              <label for="conStatus">حالة المستخلص</label>
+              <select class="select-control form-control" id="conStatus" required>
+                <option value="مستلم">مستلم</option>
+                <option value="قيد الانتظار">قيد الانتظار</option>
+                <option value="مرفوض">مرفوض</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="conDebit">المدين (المسدد نقداً)</label>
+              <input type="number" step="any" class="form-control" id="conDebit" value="0" required>
+            </div>
+            <div class="form-group">
+              <label for="conCredit">الدائن (المتبقي للورقة)</label>
+              <input type="number" step="any" class="form-control" id="conCredit" value="0" required>
+            </div>
+            <div class="form-group">
+              <label for="conMonth">الشهر</label>
+              <select class="select-control form-control" id="conMonth" required>
+                <option value="مايو">مايو</option>
+                <option value="يونيو">يونيو</option>
+                <option value="يوليو">يوليو</option>
+                <option value="يناير">يناير</option>
+                <option value="فبراير">فبراير</option>
+                <option value="مارس">مارس</option>
+                <option value="أبريل">أبريل</option>
+                <option value="أغسطس">أغسطس</option>
+                <option value="سبتمبر">سبتمبر</option>
+                <option value="أكتوبر">أكتوبر</option>
+                <option value="نوفمبر">نوفمبر</option>
+                <option value="ديسمبر">ديسمبر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="conYear">السنة</label>
+              <input type="number" class="form-control" id="conYear" value="2026" required>
+            </div>
+          </div>
+          <div class="modal-footer" style="padding-right:0; padding-left:0; margin-top: 20px;">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('contractorModal')">إلغاء</button>
+            <button type="submit" class="btn btn-primary" id="contractorFormBtn">حفظ البيانات</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Employee Edit/Add -->
+  <div class="modal-overlay" id="employeeModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="employeeModalTitle">إضافة موظف</h3>
+        <button class="close-modal-btn" onclick="closeModal('employeeModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="employeeForm" onsubmit="saveEmployee(event)">
+          <input type="hidden" id="employeeId">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="empCode">كود الموظف</label>
+              <input type="text" class="form-control" id="empCode" placeholder="مثال: مو-11" required>
+            </div>
+            <div class="form-group">
+              <label for="empName">اسم الموظف</label>
+              <input type="text" class="form-control" id="empName" placeholder="الاسم الكامل" required>
+            </div>
+            <div class="form-group">
+              <label for="empJob">الوظيفة</label>
+              <input type="text" class="form-control" id="empJob" placeholder="مثال: مهندس موقع" required>
+            </div>
+            <div class="form-group">
+              <label for="empNetSalary">الراتب الصافي</label>
+              <input type="number" step="any" class="form-control" id="empNetSalary" value="0" required>
+            </div>
+            <div class="form-group">
+              <label for="empAllowance">بدلات (إن وجدت)</label>
+              <input type="number" step="any" class="form-control" id="empAllowance" value="0" required>
+            </div>
+            <div class="form-group">
+              <label for="empDeduction">خصومات</label>
+              <input type="number" step="any" class="form-control" id="empDeduction" value="0" required>
+            </div>
+            <div class="form-group">
+              <label for="empBonus">إضافي (علاوات/مكافآت)</label>
+              <input type="number" step="any" class="form-control" id="empBonus" value="0" required>
+            </div>
+            <div class="form-group">
+              <label for="empMonth">الشهر</label>
+              <select class="select-control form-control" id="empMonth" required>
+                <option value="مايو">مايو</option>
+                <option value="يونيو">يونيو</option>
+                <option value="يوليو">يوليو</option>
+                <option value="يناير">يناير</option>
+                <option value="فبراير">فبراير</option>
+                <option value="مارس">مارس</option>
+                <option value="أبريل">أبريل</option>
+                <option value="أغسطس">أغسطس</option>
+                <option value="سبتمبر">سبتمبر</option>
+                <option value="أكتوبر">أكتوبر</option>
+                <option value="نوفمبر">نوفمبر</option>
+                <option value="ديسمبر">ديسمبر</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="empYear">السنة</label>
+              <input type="number" class="form-control" id="empYear" value="2026" required>
+            </div>
+          </div>
+          <div class="modal-footer" style="padding-right:0; padding-left:0; margin-top: 20px;">
+            <button type="button" class="btn btn-secondary" onclick="closeModal('employeeModal')">إلغاء</button>
+            <button type="submit" class="btn btn-primary" id="employeeFormBtn">حفظ البيانات</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript logic files -->
+  <script src="initialData.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
