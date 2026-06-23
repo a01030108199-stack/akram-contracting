@@ -23,6 +23,36 @@
 </head>
 <body>
 
+  <!-- ============================================== -->
+  <!-- WELCOME / SPLASH SCREEN (Masoun - د. حسام الدين) -->
+  <!-- ============================================== -->
+  <div id="splash-screen" class="splash-screen">
+    <div class="splash-content">
+      <div class="splash-logo-container">
+        <img src="logo.jpg" alt="Masoun Logo" class="splash-logo-img" id="splashLogoImg">
+        <div class="logo-glow-ring"></div>
+      </div>
+      <div class="splash-title">
+        <h2>نظام إدارة المقاولات الذكي</h2>
+        <h3>مـصـون - Masoun</h3>
+      </div>
+      <div class="splash-sub">
+        <div>
+          <i class="fa-solid fa-briefcase"></i>
+          <span>المدير المالي للمشروع: د. حسام الدين كامل</span>
+        </div>
+        <div>
+          <i class="fa-solid fa-user-gear"></i>
+          <span>تصميم وإشراف: أكرم سعد</span>
+        </div>
+      </div>
+      <button id="enterBtn" class="splash-btn">
+        <span>دخول النظام المالي</span>
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+    </div>
+  </div>
+
   <div class="app-container">
     
     <!-- Sidebar Navigation -->
@@ -705,5 +735,24 @@
   <!-- JavaScript logic files -->
   <script src="initialData.js"></script>
   <script src="app.js"></script>
+  
+  <!-- Splash Screen Entry Automation Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const splash = document.getElementById("splash-screen");
+      const enterBtn = document.getElementById("enterBtn");
+      const logoImg = document.getElementById("splashLogoImg");
+
+      const exitSplash = () => {
+        splash.classList.add("fade-out");
+        setTimeout(() => {
+          splash.style.display = "none";
+        }, 800); // 800ms aligns with CSS fade-out transition duration
+      };
+
+      if (enterBtn) enterBtn.addEventListener("click", exitSplash);
+      if (logoImg) logoImg.addEventListener("click", exitSplash);
+    });
+  </script>
 </body>
 </html>
