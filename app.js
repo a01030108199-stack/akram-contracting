@@ -231,7 +231,7 @@ function renderSuppliers() {
     
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${item.code}</td>
+      <td>${toArabicDigits(item.code)}</td>
       <td class="font-semibold">${item.name}</td>
       <td>${item.company}</td>
       <td>${item.item}</td>
@@ -358,17 +358,17 @@ function renderContractors() {
     
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${item.code}</td>
+      <td>${toArabicDigits(item.code)}</td>
       <td class="font-semibold">${item.name}</td>
       <td>${item.company}</td>
       <td>${item.task}</td>
-      <td>${item.invoiceNum}</td>
+      <td>${toArabicDigits(item.invoiceNum)}</td>
       <td><span class="badge ${statusClass}">${item.status}</span></td>
       <td>${formatNumber(item.debit)}</td>
       <td>${formatNumber(item.credit)}</td>
       <td class="font-semibold" style="color: var(--primary);">${formatNumber(totalRowPaid)}</td>
       <td>${item.month || "مايو"}</td>
-      <td>${item.year || 2026}</td>
+      <td>${toArabicDigits(item.year || 2026)}</td>
       <td>
         <div class="action-buttons">
           <button class="action-btn edit-btn" onclick="editContractor('${item.id}')"><i class="fa-solid fa-pen"></i></button>
@@ -492,7 +492,7 @@ function renderEmployees() {
     
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${item.code}</td>
+      <td>${toArabicDigits(item.code)}</td>
       <td class="font-semibold">${item.name}</td>
       <td>${item.job}</td>
       <td>${formatNumber(item.netSalary)}</td>
@@ -501,7 +501,7 @@ function renderEmployees() {
       <td>${formatNumber(item.bonus)}</td>
       <td class="font-semibold" style="color: var(--primary);">${formatNumber(totalRow)}</td>
       <td>${item.month || "مايو"}</td>
-      <td>${item.year || 2026}</td>
+      <td>${toArabicDigits(item.year || 2026)}</td>
       <td>
         <div class="action-buttons">
           <button class="action-btn edit-btn" onclick="editEmployee('${item.id}')"><i class="fa-solid fa-pen"></i></button>
@@ -686,12 +686,12 @@ function loadStatement() {
     
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${item.code}</td>
+      <td>${toArabicDigits(item.code)}</td>
       <td>توريد خامات: ${item.item}</td>
       <td><span class="badge ${statusClass}">${item.status}</span></td>
       <td>${formatNumber(item.debit)}</td>
       <td>${formatNumber(item.credit)}</td>
-      <td>مايو 2026</td>
+      <td>مايو ٢٠٢٦</td>
     `;
     tbody.appendChild(tr);
   });
@@ -708,12 +708,12 @@ function loadStatement() {
     
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${item.code} (مستخلص ${item.invoiceNum})</td>
+      <td>${toArabicDigits(item.code)} (مستخلص ${toArabicDigits(item.invoiceNum)})</td>
       <td>أعمال المقاولات: ${item.task}</td>
       <td><span class="badge ${statusClass}">${item.status}</span></td>
       <td>${formatNumber(item.debit)}</td>
       <td>${formatNumber(item.credit)}</td>
-      <td>${item.month} ${item.year}</td>
+      <td>${item.month} ${toArabicDigits(item.year)}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -978,15 +978,21 @@ function closeModal(id) {
   document.getElementById(id).classList.remove("active");
 }
 
+function toArabicDigits(str) {
+  if (str === null || str === undefined) return "";
+  return String(str).replace(/[0-9]/g, w => "٠١٢٣٤٥٦٧٨٩"[w]);
+}
+
 function formatCurrency(num) {
   return formatNumber(num) + " ر.س";
 }
 
 function formatNumber(num) {
-  return Number(num).toLocaleString("ar-SA", {
+  const formatted = Number(num).toLocaleString("ar-SA", {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2
   });
+  return toArabicDigits(formatted);
 }
 
 // Global functions for editing suppliers/contractors/employees
