@@ -927,7 +927,7 @@ header {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(circle at center, #063c2b 0%, #031c14 60%, #010a07 100%);
+  background: radial-gradient(circle at center, #2e1a12 0%, #1a0f0a 60%, #0c0705 100%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -950,8 +950,8 @@ header {
 
 .splash-logo-container {
   position: relative;
-  width: 260px;
-  height: 260px;
+  width: 340px;
+  height: 340px;
   margin-bottom: 2.5rem;
   display: flex;
   justify-content: center;
@@ -959,8 +959,8 @@ header {
 }
 
 .splash-logo-img {
-  width: 240px;
-  height: 240px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #d4af37;
@@ -980,8 +980,8 @@ header {
   position: absolute;
   top: 4px;
   left: 4px;
-  width: 248px;
-  height: 248px;
+  width: 328px;
+  height: 328px;
   border-radius: 50%;
   border: 2px dashed rgba(212, 175, 55, 0.45);
   animation: rotateRing 30s linear infinite;
