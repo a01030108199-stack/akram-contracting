@@ -1,754 +1,750 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>نظام إدارة المقاولات الذكي</title>
-  
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#00b4a0">
-  
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
-  <!-- SheetJS (XLSX) CDN for Excel Export -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  
-  <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=2">
+    <!-- Google tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YMTQR1GXBQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-YMTQR1GXBQ');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Cache Control to force browser refresh -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- SEO Optimization -->
+    <title>أكرم سعد | محاسب أول ومحلل بيانات مالية</title>
+    <meta name="description" content="معرض الأعمال الشخصي للمحاسب المالي الأول ومحلل البيانات أكرم سعد. دمج العلوم المحاسبية بأدوات تحليل البيانات الحديثة مثل Power BI و SQL و Python.">
+    <meta name="keywords" content="أكرم سعد, محاسب أول, محلل بيانات مالية, صوامع طامية, Power BI, SQL, Python, أتمتة مالية, معايير المحاسبة المصرية الدولية IFRS">
+    <meta name="author" content="أكرم سعد">
+
+    <!-- JSON-LD Structured Data for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "أكرم سعد",
+      "jobTitle": "محاسب أول ومحلل بيانات مالية",
+      "url": "https://a01030108199-stack.github.io/portfolio/",
+      "sameAs": [
+        "https://github.com/AkramSaad",
+        "https://www.linkedin.com/in/akramsaad"
+      ],
+      "knowsAbout": ["Accounting", "Financial Analysis", "Power BI", "Python", "SQL", "Excel VBA"],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "الشركة المصرية القابضة للصوامع والتخزين"
+      }
+    }
+    </script>
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="أكرم سعد | محاسب أول ومحلل بيانات مالية">
+    <meta property="og:description" content="دمج المحاسبة والرقابة المالية بأدوات تحليل البيانات الذكية لتقديم لوحات تحكم تفاعلية ودعم القرار الاستراتيجي.">
+    <meta property="og:image" content="assets/images/portfolio_preview.png">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="styles.css?v=13">
 </head>
 <body>
 
-  <!-- ============================================== -->
-  <!-- WELCOME / SPLASH SCREEN (Masoun - د. حسام الدين) -->
-  <!-- ============================================== -->
-  <div id="splash-screen" class="splash-screen">
-    <div class="splash-content">
-      <div class="splash-logo-container">
-        <img src="logo.jpg?v=2" alt="Masoun Logo" class="splash-logo-img" id="splashLogoImg">
-        <div class="logo-glow-ring"></div>
-      </div>
-      <div class="splash-title">
-        <h2>نظام إدارة المقاولات الذكي</h2>
-        <h3>مـصـون - Masoun</h3>
-      </div>
-      <div class="splash-sub">
-        <div>
-          <i class="fa-solid fa-briefcase"></i>
-          <span>المدير المالي للمشروع: د. حسام الدين كامل</span>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" id="announcement-bar">
+        <div class="announcement-content">
+            <i class="fas fa-bolt"></i>
+            <span>متاح للعمل الحر الآن — Power BI | Python | SQL | Excel Automation</span>
+            <a href="#contact" class="announcement-cta">تواصل معي</a>
         </div>
-      </div>
-      <button id="enterBtn" class="splash-btn">
-        <span>دخول النظام المالي</span>
-        <i class="fa-solid fa-arrow-left"></i>
-      </button>
+        <button class="announcement-close" id="announcement-close" aria-label="إغلاق"><i class="fas fa-times"></i></button>
     </div>
-  </div>
 
-  <div class="app-container">
-    
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-      <div class="logo-section">
-        <div class="logo-container">
-          <img src="logo.jpg?v=2" alt="Masoun Logo" class="logo-image">
+    <!-- Background Glowing Shapes -->
+    <div class="glow-blob blob-1"></div>
+    <div class="glow-blob blob-2"></div>
+
+    <!-- Header & Navigation -->
+    <header class="header" id="header">
+        <div class="container nav-container">
+            <!-- Logo area -->
+            <div class="logo-area">
+                <img src="assets/images/logo.jpg" alt="لوجو أكرم سعد" class="logo-img" id="logo-img">
+                <span class="logo-text">أكرم سعد</span>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="nav-menu" id="nav-menu">
+                <a href="#hero" class="nav-link active">الرئيسية</a>
+                <a href="#about" class="nav-link">عني</a>
+                <a href="#services" class="nav-link">خدماتي</a>
+                <a href="#projects" class="nav-link">مشاريعي</a>
+                <a href="#testimonials" class="nav-link">آراء العملاء</a>
+                <a href="#contact" class="nav-link">تواصل معي</a>
+            </nav>
+
+            <!-- Action buttons -->
+            <div class="nav-actions">
+                <!-- Theme Toggle Button -->
+                <button class="btn-icon" id="theme-toggle" title="تغيير الوضع">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <!-- Download CV -->
+                <a href="assets/cv_akram.pdf" target="_blank" class="btn btn-primary" id="cv-download-btn">
+                    <i class="fas fa-download"></i>
+                    <span>السيرة الذاتية</span>
+                </a>
+                <!-- Certificates Button -->
+                <button class="btn" id="certificates-btn" title="عرض الشهادات والاعتمادات">
+                    <i class="fas fa-award"></i>
+                    <span>الشهادات</span>
+                </button>
+                <!-- Mobile Hamburger Menu -->
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
-        <div class="logo-text">
-          <h1>مصون - Masoun</h1>
-          <p>لوحة التحكم الذكية الإصدار ١.٠</p>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container hero-grid">
+            <!-- Right / Main Content -->
+            <div class="hero-content reveal">
+                <!-- بنر الترحيب الذكي بالدولة -->
+                <div class="welcome-banner" id="welcome-banner" style="display: none; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); padding: 8px 18px; border-radius: 30px; font-size: 13px; color: #ffffff; margin-bottom: 20px; align-items: center; gap: 8px; width: fit-content; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+                    <span id="welcome-flag" style="font-size: 18px;">🌍</span>
+                    <span id="welcome-text" style="font-weight: 500;">أهلاً بك! نسعد بزيارتك الكريمة للموقع.</span>
+                </div>
+                
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i>
+                    <span>خبرة 18+ عاماً في المحاسبة وتحليل البيانات</span>
+                </div>
+                <h1 class="hero-title">أنا <span>أكرم سعد</span><br>محاسب أول ومحلل بيانات مالية</h1>
+                <h2 class="hero-subtitle">أقوم بدمج العلوم المحاسبية بأدوات تحليل البيانات الحديثة وأتمتة العمليات المالية.</h2>
+                <p class="hero-desc">باحث دكتوراه وماجستير في المحاسبة والمراجعة. متخصص في تطوير لوحات تحكم تفاعلية (Dashboards) لربط وتتبع مؤشرات الأداء المالي، وأتمتة المطابقات والتسويات البنكية باستخدام Power BI، SQL، و Python لدعم الإدارة العليا في اتخاذ القرارات الاستراتيجية.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>استعراض مشاريعي</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>تواصل معي</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Left / Visual Content -->
+            <div class="hero-visual reveal">
+                <div class="avatar-wrapper">
+                    <img src="assets/images/avatar.png" alt="أكرم سعد" class="avatar-img" onerror="this.src='https://placehold.co/400x400/120d24/ffffff?text=%D8%A3%D9%83%D8%B1%D9%85+%D8%B3%D8%B9%D8%AF'">
+                </div>
+                <!-- Interactive floating background shapes -->
+                <div class="hero-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                </div>
+            </div>
         </div>
-      </div>
-      
-      <ul class="nav-links">
-        <li class="nav-item active" data-tab="dashboard">
-          <a href="#"><i class="fa-solid fa-chart-line"></i><span>اللوحة الرئيسية</span></a>
-        </li>
-        <li class="nav-item" data-tab="suppliers">
-          <a href="#"><i class="fa-solid fa-truck-loading"></i><span>مصروفات الموردين</span></a>
-        </li>
-        <li class="nav-item" data-tab="contractors">
-          <a href="#"><i class="fa-solid fa-hard-hat"></i><span>مستخلصات المقاولين</span></a>
-        </li>
-        <li class="nav-item" data-tab="employees">
-          <a href="#"><i class="fa-solid fa-users"></i><span>رواتب العاملين</span></a>
-        </li>
-        <li class="nav-item" data-tab="statement">
-          <a href="#"><i class="fa-solid fa-file-invoice-dollar"></i><span>كشف حساب تحليلي</span></a>
-        </li>
-        <li class="nav-item" data-tab="datacenter">
-          <a href="#"><i class="fa-solid fa-database"></i><span>إدارة البيانات</span></a>
-        </li>
-      </ul>
-      
-      <div class="sidebar-footer">
-        <div class="creator-card">
-          <div class="creator-icon"><i class="fa-solid fa-briefcase"></i></div>
-          <div class="creator-info">
-            <span class="creator-label">المدير المالي للمشروع</span>
-            <span class="creator-name">د. حسام الدين كامل</span>
-          </div>
+    </section>
+
+    <!-- ==================== STATS SECTION ==================== -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card-new glass reveal">
+                    <div class="stat-icon-new"><i class="fas fa-briefcase"></i></div>
+                    <div class="stat-number-new" data-target="18" data-suffix="+">0</div>
+                    <div class="stat-label-new">سنة خبرة</div>
+                </div>
+                <div class="stat-card-new glass reveal">
+                    <div class="stat-icon-new"><i class="fas fa-project-diagram"></i></div>
+                    <div class="stat-number-new" data-target="10" data-suffix="+">0</div>
+                    <div class="stat-label-new">مشروع منجز</div>
+                </div>
+                <div class="stat-card-new glass reveal">
+                    <div class="stat-icon-new"><i class="fas fa-users"></i></div>
+                    <div class="stat-number-new" data-target="20" data-suffix="+">0</div>
+                    <div class="stat-label-new">عميل راضٍ</div>
+                </div>
+                <div class="stat-card-new glass reveal">
+                    <div class="stat-icon-new"><i class="fas fa-star"></i></div>
+                    <div class="stat-number-new" data-target="100" data-suffix="%">0</div>
+                    <div class="stat-label-new">رضا العملاء</div>
+                </div>
+            </div>
         </div>
-        <div class="creator-card">
-          <div class="creator-icon"><i class="fa-solid fa-user-gear"></i></div>
-          <div class="creator-info">
-            <span class="creator-label">تصميم وإشراف</span>
-            <span class="creator-name">أكرم سعد</span>
-            <span class="creator-title">باحث دكتوراه ومحلل بيانات</span>
-          </div>
+    </section>
+
+    <!-- About & Skills Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title">من أنا؟</h2>
+            <div class="about-grid">
+                <!-- Brief Info & Stats -->
+                <div class="about-details glass reveal">
+                    <p class="about-text">
+                        أعمل كمحاسب مالي أول ومحلل بيانات بالشركة المصرية القابضة للصوامع والتخزين منذ عام 2007. باحث دكتوراه في المحاسبة والمراجعة بجامعة الزقازيق، وحاصل على الماجستير لعام 2024.
+                    </p>
+                    <p class="about-text">
+                        أتميز بشغف كبير في دمج الفكر المحاسبي والأكاديمي بالتكنولوجيا الحديثة، حيث قمت بتطوير "منصة التحليل والأتمتة لصوامع طامية" باستخدام لغة البايثون، بالإضافة إلى تصميم لوحات متابعة تكاليف التشغيل والتخزين بدقة واحترافية عالية.
+                    </p>
+                    <!-- Visual stats block -->
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">+18</span>
+                            <span class="stat-label">سنوات خبرة</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">دكتوراه</span>
+                            <span class="stat-label">باحث أكاديمي</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">أتمتة ودقة التقارير</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Area -->
+                <div class="skills-container reveal">
+                    <!-- Data Analysis Skills -->
+                    <div class="skill-category glass">
+                        <h3 class="skill-cat-title">
+                            <i class="fas fa-chart-line"></i>
+                            <span>تحليل البيانات والذكاء الاصطناعي</span>
+                        </h3>
+                        <div class="skills-list">
+                            <div class="skill-tag"><i class="fas fa-chart-bar"></i> Power BI</div>
+                            <div class="skill-tag"><i class="fas fa-database"></i> SQL Databases</div>
+                            <div class="skill-tag"><i class="fas fa-filter"></i> Power Query</div>
+                            <div class="skill-tag"><i class="fas fa-table"></i> Advanced Excel & Pivot Tables</div>
+                        </div>
+                    </div>
+
+                    <!-- Python & Automation Skills -->
+                    <div class="skill-category glass">
+                        <h3 class="skill-cat-title">
+                            <i class="fab fa-python"></i>
+                            <span>البرمجة والأتمتة الذكية</span>
+                        </h3>
+                        <div class="skills-list">
+                            <div class="skill-tag"><i class="fab fa-python"></i> Python (Pandas/NumPy)</div>
+                            <div class="skill-tag"><i class="fas fa-rocket"></i> Streamlit Web Apps</div>
+                            <div class="skill-tag"><i class="fas fa-share-nodes"></i> API ETL Pipelines</div>
+                            <div class="skill-tag"><i class="fas fa-cogs"></i> Process Automation</div>
+                        </div>
+                    </div>
+
+                    <!-- Accounting & Auditing -->
+                    <div class="skill-category glass">
+                        <h3 class="skill-cat-title">
+                            <i class="fas fa-calculator"></i>
+                            <span>المحاسبة والمراجعة والرقابة</span>
+                        </h3>
+                        <div class="skills-list">
+                            <div class="skill-tag"><i class="fas fa-file-invoice-dollar"></i> معايير المحاسبة الدولية (IFRS)</div>
+                            <div class="skill-tag"><i class="fas fa-shield-halved"></i> الرقابة الداخلية والمراجعة</div>
+                            <div class="skill-tag"><i class="fas fa-balance-scale"></i> التسويات البنكية ومطابقة الحسابات</div>
+                            <div class="skill-tag"><i class="fas fa-file-contract"></i> إعداد الموازنات التقديرية</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button class="theme-toggle-btn" id="themeToggleBtn">
-          <i class="fa-solid fa-moon"></i><span>الوضع الداكن</span>
-        </button>
-      </div>
-    </aside>
-    
-    <!-- Main Content Panel -->
-    <main class="main-content">
-      
-      <!-- ============================================== -->
-      <!-- SECTION: DASHBOARD -->
-      <!-- ============================================== -->
-      <section id="dashboard" class="app-section active">
-        <header>
-          <div class="page-title">
-            <h2>اللوحة الرئيسية للتحليل والماليات</h2>
-            <p>متابعة تفصيلية للميزانيات والمصروفات والتدفق النقدي للمشروع</p>
-          </div>
-          <div class="header-actions">
-            <button class="btn btn-secondary" onclick="openBudgetModal()"><i class="fa-solid fa-cog"></i> تعديل ميزانيات البنود</button>
-          </div>
-        </header>
-        
-        <!-- KPI Cards Grid -->
-        <div class="dashboard-grid">
-          <div class="glass-card kpi-card primary-border">
-            <div class="kpi-info">
-              <span class="kpi-label">قيمة عقد المشروع</span>
-              <span class="kpi-value" id="kpiContractValue">0.00</span>
-            </div>
-            <div class="kpi-icon"><i class="fa-solid fa-file-signature"></i></div>
-          </div>
-          <div class="glass-card kpi-card secondary-kpi secondary-border">
-            <div class="kpi-info">
-              <span class="kpi-label">الميزانية التقديرية الكلية</span>
-              <span class="kpi-value" id="kpiTotalBudget">0.00</span>
-            </div>
-            <div class="kpi-icon"><i class="fa-solid fa-calculator"></i></div>
-          </div>
-          <div class="glass-card kpi-card success-kpi success-border">
-            <div class="kpi-info">
-              <span class="kpi-label">إجمالي المنصرف الفعلي</span>
-              <span class="kpi-value" id="kpiActualSpent">0.00</span>
-            </div>
-            <div class="kpi-icon"><i class="fa-solid fa-coins"></i></div>
-          </div>
-          <div class="glass-card kpi-card danger-kpi danger-border">
-            <div class="kpi-info">
-              <span class="kpi-label">الانحراف / المتبقي بالميزانية</span>
-              <span class="kpi-value" id="kpiVariance">0.00</span>
-            </div>
-            <div class="kpi-icon" id="varianceIcon"><i class="fa-solid fa-arrow-trend-down"></i></div>
-          </div>
-          <div class="glass-card kpi-card warning-kpi warning-border">
-            <div class="kpi-info">
-              <span class="kpi-label">المتبقي السائل من قيمة العقد</span>
-              <span class="kpi-value" id="kpiLiquidRemaining">0.00</span>
-            </div>
-            <div class="kpi-icon" id="liquidIcon"><i class="fa-solid fa-hand-holding-usd"></i></div>
-          </div>
-        </div>
-        
-        <!-- Charts Section -->
-        <div class="charts-grid">
-          <div class="glass-card">
-            <div class="chart-header">
-              <span class="chart-title">مقارنة الميزانية التقديرية والمنصرف الفعلي لكل بند</span>
-            </div>
-            <div class="chart-canvas-container">
-              <canvas id="barChart"></canvas>
-            </div>
-          </div>
-          <div class="glass-card">
-            <div class="chart-header">
-              <span class="chart-title">توزيع المصروفات الفعلية</span>
-            </div>
-            <div class="chart-canvas-container">
-              <canvas id="pieChart"></canvas>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      <!-- ============================================== -->
-      <!-- SECTION: SUPPLIER EXPENSES -->
-      <!-- ============================================== -->
-      <section id="suppliers" class="app-section">
-        <header>
-          <div class="page-title">
-            <h2>مصروفات الموردين (المستلم)</h2>
-            <p>إدارة وتوثيق طلبات التوريد، المدفوعات والديون الخاصة بالموردين</p>
-          </div>
-          <div class="header-actions">
-            <button class="btn btn-primary" onclick="openSupplierModal()"><i class="fa-solid fa-plus"></i> إضافة فاتورة مورد</button>
-          </div>
-        </header>
-        
-        <div class="glass-card data-card">
-          <div class="card-header-actions">
-            <div class="search-filter-wrapper">
-              <div class="search-input-wrapper">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" class="form-control" id="searchSupplier" placeholder="البحث باسم المورد أو الشركة أو الخامات...">
-              </div>
-              <select class="select-control" id="filterSupplierStatus">
-                <option value="">كل الحالات</option>
-                <option value="مستلمة">مستلمة</option>
-                <option value="قيد الانتظار">قيد الانتظار</option>
-                <option value="مرفوضة">مرفوضة</option>
-              </select>
-            </div>
-            <button class="btn btn-secondary" onclick="exportTableToExcel('supplierTable', 'مصروفات_الموردين')">
-              <i class="fa-solid fa-file-excel"></i> تصدير Excel
-            </button>
-          </div>
-          
-          <div class="table-responsive">
-            <table class="custom-table" id="supplierTable">
-              <thead>
-                <tr>
-                  <th>كود المورد</th>
-                  <th>اسم المورد (المستلم)</th>
-                  <th>الشركة</th>
-                  <th>الخامات / المعدات</th>
-                  <th>حالة الطلبية</th>
-                  <th>المدين (دفعة مسلَّمة)</th>
-                  <th>الدائن (مستحقات معلقة)</th>
-                  <th>الإجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="supplierTableBody">
-                <!-- Dynamic Content -->
-              </tbody>
-              <tfoot>
-                <tr class="table-summary-row" id="supplierTableSummary">
-                  <!-- Dynamic Summary Row -->
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </section>
-      
-      <!-- ============================================== -->
-      <!-- SECTION: CONTRACTOR EXPENSES -->
-      <!-- ============================================== -->
-      <section id="contractors" class="app-section">
-        <header>
-          <div class="page-title">
-            <h2>مستخلصات مقاولي الباطن</h2>
-            <p>إدارة الدفعات والمستخلصات والأعمال المنجزة بواسطة المقاولين</p>
-          </div>
-          <div class="header-actions">
-            <button class="btn btn-primary" onclick="openContractorModal()"><i class="fa-solid fa-plus"></i> إضافة مستخلص</button>
-          </div>
-        </header>
-        
-        <div class="glass-card data-card">
-          <div class="card-header-actions">
-            <div class="search-filter-wrapper">
-              <div class="search-input-wrapper">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" class="form-control" id="searchContractor" placeholder="البحث باسم المقاول، الشركة أو المهمة...">
-              </div>
-              <select class="select-control" id="filterContractorStatus">
-                <option value="">كل الحالات</option>
-                <option value="مستلم">مستلم</option>
-                <option value="قيد الانتظار">قيد الانتظار</option>
-                <option value="مرفوض">مرفوض</option>
-              </select>
-            </div>
-            <button class="btn btn-secondary" onclick="exportTableToExcel('contractorTable', 'مصروفات_المقاولين')">
-              <i class="fa-solid fa-file-excel"></i> تصدير Excel
-            </button>
-          </div>
-          
-          <div class="table-responsive">
-            <table class="custom-table" id="contractorTable">
-              <thead>
-                <tr>
-                  <th>كود المقاول</th>
-                  <th>اسم المقاول (المستلم)</th>
-                  <th>الشركة</th>
-                  <th>المهمة / الخدمة</th>
-                  <th>رقم المستخلص</th>
-                  <th>حالة المستخلص</th>
-                  <th>المدين (مسدد)</th>
-                  <th>الدائن (متبقٍ)</th>
-                  <th>إجمالي المستخلص</th>
-                  <th>الشهر</th>
-                  <th>السنة</th>
-                  <th>الإجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="contractorTableBody">
-                <!-- Dynamic Content -->
-              </tbody>
-              <tfoot>
-                <tr class="table-summary-row" id="contractorTableSummary">
-                  <!-- Dynamic Summary Row -->
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </section>
-      
-      <!-- ============================================== -->
-      <!-- SECTION: EMPLOYEE SALARIES -->
-      <!-- ============================================== -->
-      <section id="employees" class="app-section">
-        <header>
-          <div class="page-title">
-            <h2>رواتب وأجور العاملين</h2>
-            <p>جدول كشف المرتبات، البدلات، الخصومات والمكافآت الشهرية للموظفين</p>
-          </div>
-          <div class="header-actions">
-            <button class="btn btn-primary" onclick="openEmployeeModal()"><i class="fa-solid fa-plus"></i> إضافة موظف</button>
-          </div>
-        </header>
-        
-        <div class="glass-card data-card">
-          <div class="card-header-actions">
-            <div class="search-filter-wrapper">
-              <div class="search-input-wrapper">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" class="form-control" id="searchEmployee" placeholder="البحث باسم الموظف أو الوظيفة...">
-              </div>
-              <select class="select-control" id="filterEmployeeMonth">
-                <option value="">كل الشهور</option>
-                <option value="يناير">يناير</option>
-                <option value="فبراير">فبراير</option>
-                <option value="مارس">مارس</option>
-                <option value="أبريل">أبريل</option>
-                <option value="مايو">مايو</option>
-                <option value="يونيو">يونيو</option>
-                <option value="يوليو">يوليو</option>
-                <option value="أغسطس">أغسطس</option>
-                <option value="سبتمبر">سبتمبر</option>
-                <option value="أكتوبر">أكتوبر</option>
-                <option value="نوفمبر">نوفمبر</option>
-                <option value="ديسمبر">ديسمبر</option>
-              </select>
-            </div>
-            <button class="btn btn-secondary" onclick="exportTableToExcel('employeeTable', 'رواتب_العاملين')">
-              <i class="fa-solid fa-file-excel"></i> تصدير Excel
-            </button>
-          </div>
-          
-          <div class="table-responsive">
-            <table class="custom-table" id="employeeTable">
-              <thead>
-                <tr>
-                  <th>كود الموظف</th>
-                  <th>اسم الموظف</th>
-                  <th>الوظيفة</th>
-                  <th>الراتب الصافي</th>
-                  <th>بدلات (إن وجدت)</th>
-                  <th>خصومات</th>
-                  <th>إضافي (علاوات/مكافآت)</th>
-                  <th>إجمالي المصروف الفعلي</th>
-                  <th>الشهر</th>
-                  <th>السنة</th>
-                  <th>الإجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="employeeTableBody">
-                <!-- Dynamic Content -->
-              </tbody>
-              <tfoot>
-                <tr class="table-summary-row" id="employeeTableSummary">
-                  <!-- Dynamic Summary Row -->
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </section>
-      
-      <!-- ============================================== -->
-      <!-- SECTION: STATEMENT (ANALYTICAL ACCOUNT) -->
-      <!-- ============================================== -->
-      <section id="statement" class="app-section">
-        <header>
-          <div class="page-title">
-            <h2>كشف حساب تحليلي تفصيلي</h2>
-            <p>اختر اسم مورد أو مقاول لعرض تقرير مالي شامل بكافة معاملاته المباشرة</p>
-          </div>
-        </header>
-        
-        <div class="glass-card data-card">
-          <div style="max-width: 400px; margin-bottom: 1.5rem;">
-            <label style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">اختر المورد أو المقاول:</label>
-            <select class="select-control form-control" id="statementSelect" style="padding: 10px 15px;" onchange="loadStatement()">
-              <option value="">-- اختر اسماً من القائمة --</option>
-            </select>
-          </div>
-          
-          <div id="statementResultContainer" class="statement-box" style="display: none;">
-            <div class="statement-meta">
-              <div class="meta-item">
-                <span class="meta-label">نوع الحساب</span>
-                <span class="meta-val" id="statementType">-</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">الشركة المرتبطة</span>
-                <span class="meta-val" id="statementCompany">-</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">إجمالي المدين (المدفوع له)</span>
-                <span class="meta-val" id="statementTotalDebit">0.00</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">إجمالي الدائن (المستحقات المعلقة)</span>
-                <span class="meta-val" id="statementTotalCredit">0.00</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-label">إجمالي قيمة المستحقات</span>
-                <span class="meta-val" id="statementTotalDues" style="color: var(--primary); font-weight: 800;">0.00</span>
-              </div>
-            </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
+        <div class="container">
+            <h2 class="section-title">مشاريع الأتمتة والتحليل</h2>
             
-            <div class="table-responsive">
-              <table class="custom-table" id="statementTable">
-                <thead>
-                  <tr>
-                    <th>كود العملية</th>
-                    <th>التفاصيل / البيان</th>
-                    <th>حالة الطلبية/المستخلص</th>
-                    <th>المدين (مدفوع له)</th>
-                    <th>الدائن (مستحق معلق)</th>
-                    <th>التاريخ / الفترة</th>
-                  </tr>
-                </thead>
-                <tbody id="statementTableBody">
-                  <!-- Dynamic Content -->
-                </tbody>
-              </table>
+            <!-- Category Filters -->
+            <div class="filter-menu reveal">
+                <button class="filter-btn active" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="data">تحليل بيانات ولوحات تحكم (Power BI / JS)</button>
+                <button class="filter-btn" data-filter="python">أتمتة وبرمجة (Python)</button>
+                <button class="filter-btn" data-filter="excel">جداول وبرامج (Excel)</button>
             </div>
-          </div>
-          
-          <div id="statementPlaceholder" style="text-align: center; padding: 3rem; color: var(--text-muted);">
-            <i class="fa-solid fa-folder-open" style="font-size: 3rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
-            يرجى اختيار اسم لعرض كشف الحساب التحليلي
-          </div>
+
+            <!-- Projects Grid (Loaded dynamically from projects.js) -->
+            <div class="projects-grid" id="projects-grid">
+                <!-- Projects will be generated here by Javascript -->
+            </div>
         </div>
-      </section>
-      
-      <!-- ============================================== -->
-      <!-- SECTION: DATA CENTER / SETTINGS -->
-      <!-- ============================================== -->
-      <section id="datacenter" class="app-section">
-        <header>
-          <div class="page-title">
-            <h2>إدارة البيانات والنظام</h2>
-            <p>تصدير واستيراد قواعد البيانات وأخذ نسخ احتياطية للمحافظة على بياناتك</p>
-          </div>
-        </header>
-        
-        <div class="settings-grid">
-          <div class="glass-card settings-card">
-            <h3><i class="fa-solid fa-download" style="color: var(--primary); margin-left: 8px;"></i> النسخ الاحتياطي وتصدير البيانات</h3>
-            <p>قم بتنزيل كافة بيانات المشروع الحالية كملف JSON مشفر للرجوع إليه وتأمين معلوماتك في أي وقت.</p>
-            <div class="flex-buttons">
-              <button class="btn btn-primary" onclick="exportDataJSON()"><i class="fa-solid fa-file-code"></i> تصدير البيانات (JSON)</button>
-              <button class="btn btn-secondary" onclick="exportAllToExcel()"><i class="fa-solid fa-file-excel"></i> تصدير كل الجداول لملف Excel واحد</button>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section class="section services-section-new" id="services">
+        <div class="container">
+            <h2 class="section-title">خدماتي</h2>
+            <p class="section-subtitle-new">أقدم خدمات احترافية تجمع بين الخبرة المحاسبية وأحدث أدوات تحليل البيانات</p>
+
+            <div class="services-grid-new">
+
+                <div class="service-card-new glass reveal">
+                    <div class="service-icon-wrapper-new"><i class="fas fa-chart-bar service-icon-new"></i></div>
+                    <h3 class="service-title-new">لوحات Power BI التفاعلية</h3>
+                    <p class="service-desc-new">تصميم لوحات تحكم مالية تفاعلية تعرض KPIs وتحلل الأداء المالي بشكل بصري احترافي مخصص لاحتياجات شركتك.</p>
+                    <ul class="service-features-new">
+                        <li><i class="fas fa-check"></i> لوحات تحكم مالية مخصصة</li>
+                        <li><i class="fas fa-check"></i> تقارير الأداء الشهرية والسنوية</li>
+                        <li><i class="fas fa-check"></i> ربط مصادر بيانات متعددة</li>
+                    </ul>
+                    <div class="service-price-new">
+                        <span class="price-from-new">تبدأ من</span>
+                        <span class="price-amount-new">$150</span>
+                        <span class="price-period-new">/ لوحة</span>
+                    </div>
+                    <a href="#contact" class="btn btn-primary service-btn-new">اطلب الآن</a>
+                </div>
+
+                <div class="service-card-new service-card-featured-new glass reveal">
+                    <div class="service-badge-featured">الأكثر طلباً ⭐</div>
+                    <div class="service-icon-wrapper-new"><i class="fab fa-python service-icon-new"></i></div>
+                    <h3 class="service-title-new">أتمتة المالية بـ Python</h3>
+                    <p class="service-desc-new">برمجة Python لأتمتة التقارير المالية والمطابقات البنكية ومعالجة البيانات المحاسبية تلقائياً بدقة عالية.</p>
+                    <ul class="service-features-new">
+                        <li><i class="fas fa-check"></i> أتمتة التقارير الشهرية</li>
+                        <li><i class="fas fa-check"></i> مطابقات بنكية تلقائية</li>
+                        <li><i class="fas fa-check"></i> تحليل بيانات Pandas/NumPy</li>
+                    </ul>
+                    <div class="service-price-new">
+                        <span class="price-from-new">تبدأ من</span>
+                        <span class="price-amount-new">$200</span>
+                        <span class="price-period-new">/ مشروع</span>
+                    </div>
+                    <a href="#contact" class="btn btn-primary service-btn-new">اطلب الآن</a>
+                </div>
+
+                <div class="service-card-new glass reveal">
+                    <div class="service-icon-wrapper-new"><i class="fas fa-file-excel service-icon-new"></i></div>
+                    <h3 class="service-title-new">حلول Excel & VBA المتقدمة</h3>
+                    <p class="service-desc-new">تطوير حلول Excel احترافية بماكرو VBA لأتمتة العمليات الحسابية وإنشاء نماذج مالية متقدمة.</p>
+                    <ul class="service-features-new">
+                        <li><i class="fas fa-check"></i> ماكرو VBA مخصص</li>
+                        <li><i class="fas fa-check"></i> نماذج محاسبية ذكية</li>
+                        <li><i class="fas fa-check"></i> لوحات تحكم Excel</li>
+                    </ul>
+                    <div class="service-price-new">
+                        <span class="price-from-new">تبدأ من</span>
+                        <span class="price-amount-new">$80</span>
+                        <span class="price-period-new">/ مشروع</span>
+                    </div>
+                    <a href="#contact" class="btn btn-primary service-btn-new">اطلب الآن</a>
+                </div>
+
+                <div class="service-card-new glass reveal">
+                    <div class="service-icon-wrapper-new"><i class="fas fa-balance-scale service-icon-new"></i></div>
+                    <h3 class="service-title-new">استشارات مالية ومحاسبية</h3>
+                    <p class="service-desc-new">استشارات متخصصة في IFRS والمراجعة الداخلية وتحليل القوائم المالية ودعم القرار الاستراتيجي.</p>
+                    <ul class="service-features-new">
+                        <li><i class="fas fa-check"></i> تطبيق معايير IFRS</li>
+                        <li><i class="fas fa-check"></i> تحليل القوائم المالية</li>
+                        <li><i class="fas fa-check"></i> مراجعة وتدقيق الحسابات</li>
+                    </ul>
+                    <div class="service-price-new">
+                        <span class="price-from-new">تبدأ من</span>
+                        <span class="price-amount-new">$100</span>
+                        <span class="price-period-new">/ ساعة</span>
+                    </div>
+                    <a href="#contact" class="btn btn-primary service-btn-new">اطلب الآن</a>
+                </div>
+
+                <div class="service-card-new glass reveal">
+                    <div class="service-icon-wrapper-new"><i class="fas fa-database service-icon-new"></i></div>
+                    <h3 class="service-title-new">تحليل البيانات بـ SQL</h3>
+                    <p class="service-desc-new">بناء وتحليل قواعد البيانات المالية وكتابة استعلامات SQL معقدة لاستخراج تقارير من أنظمة ERP.</p>
+                    <ul class="service-features-new">
+                        <li><i class="fas fa-check"></i> استعلامات SQL معقدة</li>
+                        <li><i class="fas fa-check"></i> تحليل بيانات ERP</li>
+                        <li><i class="fas fa-check"></i> تنظيف وتحضير البيانات</li>
+                    </ul>
+                    <div class="service-price-new">
+                        <span class="price-from-new">تبدأ من</span>
+                        <span class="price-amount-new">$120</span>
+                        <span class="price-period-new">/ مشروع</span>
+                    </div>
+                    <a href="#contact" class="btn btn-primary service-btn-new">اطلب الآن</a>
+                </div>
+
+                <div class="service-card-new glass reveal">
+                    <div class="service-icon-wrapper-new"><i class="fas fa-chalkboard-teacher service-icon-new"></i></div>
+                    <h3 class="service-title-new">التدريب والتأهيل المهني</h3>
+                    <p class="service-desc-new">دورات تدريبية مخصصة للمحاسبين في Power BI وPython وSQL وأتمتة العمليات المالية.</p>
+                    <ul class="service-features-new">
+                        <li><i class="fas fa-check"></i> Power BI للمحاسبين</li>
+                        <li><i class="fas fa-check"></i> Python للتحليل المالي</li>
+                        <li><i class="fas fa-check"></i> جلسات فردية أو جماعية</li>
+                    </ul>
+                    <div class="service-price-new">
+                        <span class="price-from-new">تبدأ من</span>
+                        <span class="price-amount-new">$50</span>
+                        <span class="price-period-new">/ ساعة</span>
+                    </div>
+                    <a href="#contact" class="btn btn-primary service-btn-new">اطلب الآن</a>
+                </div>
+
             </div>
-          </div>
-          
-          <div class="glass-card settings-card">
-            <h3><i class="fa-solid fa-upload" style="color: var(--secondary); margin-left: 8px;"></i> استعادة البيانات المستوردة</h3>
-            <p>قم برفع ملف النسخة الاحتياطية (JSON) المستخرج سابقاً لاستعادة البيانات وحفظها في المتصفح.</p>
-            <input type="file" id="importFileInput" accept=".json" style="display: none;" onchange="importDataJSON(event)">
-            <button class="btn btn-secondary" onclick="document.getElementById('importFileInput').click()"><i class="fa-solid fa-upload"></i> اختيار ملف JSON واستيراده</button>
-          </div>
-          
-          <div class="glass-card settings-card danger-border">
-            <h3 style="color: var(--danger);"><i class="fa-solid fa-exclamation-triangle" style="margin-left: 8px;"></i> منطقة الخطر وإعادة التعيين</h3>
-            <p>سيؤدي هذا الإجراء إلى مسح كافة البيانات والتغييرات المضافة بشكل كامل وإعادة تعيين النظام للبيانات الافتراضية الأصلية المأخوذة من جداول الإكسل.</p>
-            <button class="btn btn-danger" onclick="resetSystemData()"><i class="fa-solid fa-trash-alt"></i> إعادة تعيين النظام للبيانات الافتراضية</button>
-          </div>
+
+            <div class="services-cta-new glass reveal">
+                <div>
+                    <h3>هل لديك مشروع مختلف؟</h3>
+                    <p>تواصل معي وسأقدم لك حلاً مخصصاً بسعر مناسب</p>
+                </div>
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-comments"></i> ناقش مشروعك
+                </a>
+            </div>
         </div>
-      </section>
-      
-    </main>
-  </div>
-  
-  <!-- ============================================== -->
-  <!-- MODALS SECTION -->
-  <!-- ============================================== -->
-  
-  <!-- MODAL: Budget Config -->
-  <div class="modal-overlay" id="budgetModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>تعديل الميزانيات التقديرية وقيمة العقد</h3>
-        <button class="close-modal-btn" onclick="closeModal('budgetModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="budgetForm" onsubmit="saveBudgets(event)">
-          <div class="form-grid">
-            <div class="form-group full-width">
-              <label for="inputContractValue">قيمة عقد المشروع بالكامل</label>
-              <input type="number" step="any" class="form-control" id="inputContractValue" required>
+    </section>
+
+    <!-- ==================== TESTIMONIALS SECTION ==================== -->
+    <section class="section testimonials-section-new" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">آراء العملاء</h2>
+            <p class="section-subtitle-new">ماذا يقول من تعاملوا معي</p>
+
+            <div class="testimonials-grid-new">
+
+                <div class="testimonial-card-new glass reveal">
+                    <div class="testimonial-stars-new"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testimonial-text-new">"أكرم قدم لنا لوحة Power BI احترافية جداً غيّرت طريقة إدارتنا للتقارير المالية. الشغل كان دقيق وفي الوقت المحدد، ووفّر علينا ساعات عمل كثيرة جداً."</p>
+                    <div class="testimonial-author-new">
+                        <div class="testimonial-avatar-new">م.أ</div>
+                        <div>
+                            <h4 class="testimonial-name-new">م. أحمد محمود</h4>
+                            <span class="testimonial-role-new">مدير مالي — شركة تجارية بالقاهرة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card-new glass reveal">
+                    <div class="testimonial-stars-new"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testimonial-text-new">"استفدت كثيراً من التدريب على Python للمحاسبة. أسلوب شرح أكرم واضح جداً ويربط المفاهيم بالواقع المحاسبي العملي. أنصح به كل محاسب يريد التطور."</p>
+                    <div class="testimonial-author-new">
+                        <div class="testimonial-avatar-new">س.م</div>
+                        <div>
+                            <h4 class="testimonial-name-new">أ. سارة منصور</h4>
+                            <span class="testimonial-role-new">محاسبة — مكتب تدقيق</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card-new glass reveal">
+                    <div class="testimonial-stars-new"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="testimonial-text-new">"طلبت منه أتمتة ملفات Excel معقدة بـ VBA وأنجز المهمة باحترافية عالية. الكود نظيف وموثق. خبرته في المحاسبة جعلته يفهم المتطلبات بدقة من البداية."</p>
+                    <div class="testimonial-author-new">
+                        <div class="testimonial-avatar-new">ك.ر</div>
+                        <div>
+                            <h4 class="testimonial-name-new">أ. كريم رضا</h4>
+                            <span class="testimonial-role-new">صاحب شركة — الإسكندرية</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="form-group">
-              <label for="inputSupplierBudget">ميزانية مصروفات الموردين التقديرية</label>
-              <input type="number" step="any" class="form-control" id="inputSupplierBudget" required>
+
+            <div class="freelance-badge-new glass reveal">
+                <i class="fas fa-handshake"></i>
+                <div>
+                    <strong>متاح للعمل الحر عبر</strong>
+                    <p>Upwork · Fiverr · Freelancer · مباشرة</p>
+                </div>
+                <a href="#contact" class="btn btn-primary">تعاقد معي</a>
             </div>
-            <div class="form-group">
-              <label for="inputContractorBudget">ميزانية مستخلصات المقاولين التقديرية</label>
-              <input type="number" step="any" class="form-control" id="inputContractorBudget" required>
+        </div>
+    </section>
+
+    <!-- Guestbook Section -->
+    <section class="section guestbook" id="guestbook" style="padding: 60px 0; border-top: 1px solid rgba(255, 255, 255, 0.03);">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 15px; color: #8b5cf6;">✍️ سجل الزوار ولوحة الشرف</h2>
+            <p style="text-align: center; color: var(--text-muted); max-width: 600px; margin: 0 auto 30px auto; font-size: 15px; line-height: 1.6;">
+                يسعدني جداً ترك بصمتك أو رأيك المهني هنا. شاركني اسمك ووظيفتك وكلمة تشجيعية لتظهر في لوحة شرف المعرض!
+            </p>
+            
+            <style>
+                @media (max-width: 768px) {
+                    .guestbook-grid {
+                        grid-template-columns: 1fr !important;
+                    }
+                }
+            </style>
+
+            <div class="guestbook-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 30px; align-items: start; max-width: 1000px; margin: 0 auto;">
+                
+                <!-- عرض الرسائل السابقة -->
+                <div class="guestbook-messages glass" style="padding: 25px; border-radius: 16px; min-height: 320px; max-height: 450px; overflow-y: auto;">
+                    <h3 style="margin-bottom: 20px; font-size: 18px; color: #ffffff; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 10px;">💬 رسائل الزوار الأخيرة</h3>
+                    <div id="guestbook-list" style="display: flex; flex-direction: column; gap: 15px;">
+                        <!-- سيتم تحميل الكروت هنا ديناميكياً -->
+                        <div class="guestbook-loading" style="text-align: center; color: var(--text-muted); padding: 50px 0;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 10px; color: #8b5cf6;"></i>
+                            <p>جاري تحميل رسائل الزوار...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- نموذج إضافة رسالة -->
+                <div class="guestbook-form-wrapper glass" style="padding: 25px; border-radius: 16px;">
+                    <h3 style="margin-bottom: 20px; font-size: 18px; color: #ffffff; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 10px;">✏️ اترك رسالة في السجل</h3>
+                    <form id="guestbook-form" style="display: flex; flex-direction: column; gap: 15px;">
+                        <div>
+                            <label for="gb-name" style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 5px;">الاسم الكامل</label>
+                            <input type="text" id="gb-name" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); color: #ffffff; font-family: inherit; font-size: 14px;" placeholder="اسمك الكريم" required>
+                        </div>
+                        <div>
+                            <label for="gb-title" style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 5px;">الوظيفة / الشركة</label>
+                            <input type="text" id="gb-title" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); color: #ffffff; font-family: inherit; font-size: 14px;" placeholder="مثال: محاسب قانوني، مدير مالي" required>
+                        </div>
+                        <div>
+                            <label for="gb-message" style="font-size: 13px; color: var(--text-muted); display: block; margin-bottom: 5px;">الرسالة الترحيبية</label>
+                            <textarea id="gb-message" rows="3" style="width: 100%; padding: 10px; border-radius: 8px; background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); color: #ffffff; resize: none; font-family: inherit; font-size: 14px;" placeholder="اكتب كلمتك هنا..." required></textarea>
+                        </div>
+                        <button type="submit" id="gb-submit-btn" style="background: linear-gradient(135deg, #8b5cf6, #4f46e5); color: #ffffff; padding: 12px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 15px;">
+                            <span>نشر في لوحة الشرف</span>
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </form>
+                </div>
+
             </div>
-            <div class="form-group full-width">
-              <label for="inputEmployeeBudget">ميزانية رواتب الموظفين التقديرية</label>
-              <input type="number" step="any" class="form-control" id="inputEmployeeBudget" required>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">تواصل معي</h2>
+            <div class="contact-grid">
+                <!-- Contact info cards -->
+                <div class="contact-info reveal">
+                    <!-- Email Card -->
+                    <div class="contact-info-card glass">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <span class="contact-text-title">البريد الإلكتروني</span>
+                            <div class="contact-text-value">
+                                <a href="mailto:a01030108199@gmail.com">a01030108199@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Phone Card -->
+                    <div class="contact-info-card glass">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <span class="contact-text-title">الهاتف المحمول</span>
+                            <div class="contact-text-value">
+                                <a href="tel:01030108199">01030108199</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn Card -->
+                    <div class="contact-info-card glass">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        <div class="contact-text">
+                            <span class="contact-text-title">لينكد إن</span>
+                            <div class="contact-text-value">
+                                <a href="https://linkedin.com/in/akram-saad-0655a6322" target="_blank">linkedin.com/in/akram-saad</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div class="contact-info-card glass">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <span class="contact-text-title">الموقع الحالي</span>
+                            <div class="contact-text-value">الفيوم، جمهورية مصر العربية</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper glass reveal">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name" class="form-label">الاسم الكامل</label>
+                                <input type="text" id="name" class="form-control" placeholder="اسمك الكريم" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">البريد الإلكتروني</label>
+                                <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="form-label">الموضوع</label>
+                            <input type="text" id="subject" class="form-control" placeholder="موضوع الرسالة" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">الرسالة</label>
+                            <textarea id="message" class="form-control" placeholder="اكتب رسالتك هنا بالتفصيل..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span>إرسال الرسالة</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
-          </div>
-          <div class="modal-footer" style="padding-right:0; padding-left:0; margin-top: 20px;">
-            <button type="button" class="btn btn-secondary" onclick="closeModal('budgetModal')">إلغاء</button>
-            <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
-          </div>
-        </form>
-      </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-socials">
+                <a href="https://linkedin.com/in/akram-saad-0655a6322" target="_blank" class="btn-icon" title="حساب LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="footer-text">
+                &copy; 2026 أكرم سعد. جميع الحقوق محفوظة. تم التطوير بدقة وأتمتة ذكية.
+            </p>
+            <!-- عداد الزيارات الفوري -->
+            <div class="visitor-counter-wrapper" style="margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; opacity: 0.85;">
+                <i class="fas fa-users" style="color: #8b5cf6;"></i>
+                <span style="color: var(--text-muted);">عدد زيارات المعرض:</span>
+                <span id="visitor-count" style="font-weight: 700; color: #8b5cf6; background: rgba(139, 92, 246, 0.1); padding: 2px 10px; border-radius: 12px; border: 1px solid rgba(139, 92, 246, 0.2); min-width: 40px; text-align: center;">جاري التحميل...</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Success Notification -->
+    <div class="toast-msg" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>شكراً لتواصلك! تم إرسال رسالتك بنجاح وسأرد عليك قريباً.</span>
     </div>
-  </div>
 
-  <!-- MODAL: Supplier Edit/Add -->
-  <div class="modal-overlay" id="supplierModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="supplierModalTitle">إضافة فاتورة مورد</h3>
-        <button class="close-modal-btn" onclick="closeModal('supplierModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="supplierForm" onsubmit="saveSupplier(event)">
-          <input type="hidden" id="supplierId">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="supCode">كود المورد</label>
-              <input type="text" class="form-control" id="supCode" placeholder="مثال: مد - ١١" required>
+    <!-- Certificates Modal -->
+    <div id="certificates-modal" class="modal">
+        <div class="modal-content glass">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">🏆 الشهادات العلمية والمهنية</h2>
+            <div class="certificates-list">
+                
+                <div class="cert-category-title">🎓 المؤهلات الأكاديمية والمحاسبية</div>
+                
+                <!-- 1. Master's Degree -->
+                <div class="certificate-item" data-image="cert_masters_degree.jpg">
+                    <div class="cert-icon"><i class="fas fa-user-graduate"></i></div>
+                    <div class="cert-info">
+                        <h3>درجة الماجستير المهني في المحاسبة (2024)</h3>
+                        <p>كلية التجارة - جامعة بنها (اضغط للمعاينة 👁️)</p>
+                    </div>
+                </div>
+                
+                <!-- 2. PhD Student ID -->
+                <div class="certificate-item" data-image="cert_phd_card.jpg">
+                    <div class="cert-icon"><i class="fas fa-id-card"></i></div>
+                    <div class="cert-info">
+                        <h3>قيد طالب الدكتوراه في المحاسبة والمراجعة</h3>
+                        <p>كلية التجارة - جامعة الزقازيق (اضغط للمعاينة 👁️)</p>
+                    </div>
+                </div>
+                
+                <!-- 3. PhD Grades Transcript -->
+                <div class="certificate-item" data-image="cert_phd_grades.jpg">
+                    <div class="cert-icon"><i class="fas fa-file-contract"></i></div>
+                    <div class="cert-info">
+                        <h3>بيان درجات تمهيدي الدكتوراه في المحاسبة</h3>
+                        <p>تقديرات امتياز في نظرية المحاسبة والرقابة (اضغط للمعاينة 👁️)</p>
+                    </div>
+                </div>
+
+                <!-- 4. Digital Transformation -->
+                <div class="certificate-item" data-image="cert_digital_transformation.jpg">
+                    <div class="cert-icon"><i class="fas fa-laptop-code"></i></div>
+                    <div class="cert-info">
+                        <h3>شهادة أساسيات التحول الرقمي (FDTC)</h3>
+                        <p>المجلس الأعلى للجامعات المصرية (اضغط للمعاينة 👁️)</p>
+                    </div>
+                </div>
+                
+                <div class="cert-category-title" style="margin-top: 15px;">💻 البرمجة وأتمتة البيانات والذكاء الاصطناعي</div>
+                
+                <!-- 5. Python & Java ABPS -->
+                <div class="certificate-item" data-image="cert_python_java.jpg">
+                    <div class="cert-icon"><i class="fab fa-python"></i></div>
+                    <div class="cert-info">
+                        <h3>دبلومة البرمجة بلغات جافا وبايثون (Java & Python)</h3>
+                        <p>البورد الأمريكي للدراسات المهنية - 70 ساعة (اضغط للمعاينة 👁️)</p>
+                    </div>
+                </div>
+
+                <!-- 6. AI Completion ITC -->
+                <div class="certificate-item" data-image="cert_itc_ai.jpg">
+                    <div class="cert-icon"><i class="fas fa-brain"></i></div>
+                    <div class="cert-info">
+                        <h3>شهادة إتمام دورة الذكاء الاصطناعي (ITC)</h3>
+                        <p>مركز تكنولوجيا المعلومات بالتعاون مع CISCO ومايكروسوفت (اضغط للمعاينة 👁️)</p>
+                    </div>
+                </div>
+
+                <!-- 7. Microsoft AI -->
+                <div class="certificate-item" data-image="cert_microsoft_ai.jpg">
+                    <div class="cert-icon"><i class="fas fa-robot"></i></div>
+                    <div class="cert-info">
+                        <h3>دورة مقدمة في الذكاء الاصطناعي (Microsoft)</h3>
+                        <p>مايكروسوفت ومبادرة طور وغير بوزارة الاتصالات (اضغط للمعاينة 👁️)</p>
+                    </div>
+                </div>
+
+                <!-- 8. IC3 Computer Core ABPS -->
+                <div class="certificate-item" data-image="cert_ic3.jpg">
+                    <div class="cert-icon"><i class="fas fa-network-wired"></i></div>
+                    <div class="cert-info">
+                        <h3>شهادة ريادة الحاسب والإنترنت (IC3)</h3>
+                        <p>البورد الأمريكي للدراسات المهنية - 30 ساعة (اضغط للمعاينة 👁️)</p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-              <label for="supName">اسم المورد (المستلم)</label>
-              <input type="text" class="form-control" id="supName" placeholder="اسم المستلم الفعلي" required>
-            </div>
-            <div class="form-group">
-              <label for="supCompany">الشركة</label>
-              <input type="text" class="form-control" id="supCompany" placeholder="اسم الشركة الموردة" required>
-            </div>
-            <div class="form-group">
-              <label for="supItem">الخامات / المعدات</label>
-              <input type="text" class="form-control" id="supItem" placeholder="حديد، رمل، معدات..." required>
-            </div>
-            <div class="form-group">
-              <label for="supStatus">حالة الطلبية</label>
-              <select class="select-control form-control" id="supStatus" required>
-                <option value="مستلمة">مستلمة</option>
-                <option value="قيد الانتظار">قيد الانتظار</option>
-                <option value="مرفوضة">مرفوضة</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="supDebit">المدين (الدفعة المسلَّمة نقداً)</label>
-              <input type="number" step="any" class="form-control" id="supDebit" value="0" required>
-            </div>
-            <div class="form-group">
-              <label for="supCredit">الدائن (المستحقات المعلقة)</label>
-              <input type="number" step="any" class="form-control" id="supCredit" value="0" required>
-            </div>
-          </div>
-          <div class="modal-footer" style="padding-right:0; padding-left:0; margin-top: 20px;">
-            <button type="button" class="btn btn-secondary" onclick="closeModal('supplierModal')">إلغاء</button>
-            <button type="submit" class="btn btn-primary" id="supplierFormBtn">حفظ البيانات</button>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 
-  <!-- MODAL: Contractor Edit/Add -->
-  <div class="modal-overlay" id="contractorModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="contractorModalTitle">إضافة مستخلص مقاول</h3>
-        <button class="close-modal-btn" onclick="closeModal('contractorModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="contractorForm" onsubmit="saveContractor(event)">
-          <input type="hidden" id="contractorId">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="conCode">كود المقاول</label>
-              <input type="text" class="form-control" id="conCode" placeholder="مثال: مل - ١١" required>
-            </div>
-            <div class="form-group">
-              <label for="conName">اسم المقاول (المستلم)</label>
-              <input type="text" class="form-control" id="conName" placeholder="اسم المستلم الفعلي" required>
-            </div>
-            <div class="form-group">
-              <label for="conCompany">الشركة</label>
-              <input type="text" class="form-control" id="conCompany" placeholder="اسم شركة المقاولات" required>
-            </div>
-            <div class="form-group">
-              <label for="conTask">المهمة / الخدمة</label>
-              <input type="text" class="form-control" id="conTask" placeholder="حفر، صب خرسانات..." required>
-            </div>
-            <div class="form-group">
-              <label for="conInvoiceNum">رقم المستخلص</label>
-              <input type="text" class="form-control" id="conInvoiceNum" placeholder="مثال: ١٠١" required>
-            </div>
-            <div class="form-group">
-              <label for="conStatus">حالة المستخلص</label>
-              <select class="select-control form-control" id="conStatus" required>
-                <option value="مستلم">مستلم</option>
-                <option value="قيد الانتظار">قيد الانتظار</option>
-                <option value="مرفوض">مرفوض</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="conDebit">المدين (المسدد نقداً)</label>
-              <input type="number" step="any" class="form-control" id="conDebit" value="0" required>
-            </div>
-            <div class="form-group">
-              <label for="conCredit">الدائن (المتبقي للورقة)</label>
-              <input type="number" step="any" class="form-control" id="conCredit" value="0" required>
-            </div>
-            <div class="form-group">
-              <label for="conMonth">الشهر</label>
-              <select class="select-control form-control" id="conMonth" required>
-                <option value="مايو">مايو</option>
-                <option value="يونيو">يونيو</option>
-                <option value="يوليو">يوليو</option>
-                <option value="يناير">يناير</option>
-                <option value="فبراير">فبراير</option>
-                <option value="مارس">مارس</option>
-                <option value="أبريل">أبريل</option>
-                <option value="أغسطس">أغسطس</option>
-                <option value="سبتمبر">سبتمبر</option>
-                <option value="أكتوبر">أكتوبر</option>
-                <option value="نوفمبر">نوفمبر</option>
-                <option value="ديسمبر">ديسمبر</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="conYear">السنة</label>
-              <input type="number" class="form-control" id="conYear" value="2026" required>
-            </div>
-          </div>
-          <div class="modal-footer" style="padding-right:0; padding-left:0; margin-top: 20px;">
-            <button type="button" class="btn btn-secondary" onclick="closeModal('contractorModal')">إلغاء</button>
-            <button type="submit" class="btn btn-primary" id="contractorFormBtn">حفظ البيانات</button>
-          </div>
-        </form>
-      </div>
+    <!-- Image Viewer Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <button class="lightbox-btn lightbox-prev" id="lightbox-prev" aria-label="الصورة السابقة">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="معاينة الشهادة">
+        <button class="lightbox-btn lightbox-next" id="lightbox-next" aria-label="الصورة التالية">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="lightbox-caption" id="lightbox-caption"></div>
     </div>
-  </div>
 
-  <!-- MODAL: Employee Edit/Add -->
-  <div class="modal-overlay" id="employeeModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="employeeModalTitle">إضافة موظف</h3>
-        <button class="close-modal-btn" onclick="closeModal('employeeModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="employeeForm" onsubmit="saveEmployee(event)">
-          <input type="hidden" id="employeeId">
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="empCode">كود الموظف</label>
-              <input type="text" class="form-control" id="empCode" placeholder="مثال: مو-١١" required>
-            </div>
-            <div class="form-group">
-              <label for="empName">اسم الموظف</label>
-              <input type="text" class="form-control" id="empName" placeholder="الاسم الكامل" required>
-            </div>
-            <div class="form-group">
-              <label for="empJob">الوظيفة</label>
-              <input type="text" class="form-control" id="empJob" placeholder="مثال: مهندس موقع" required>
-            </div>
-            <div class="form-group">
-              <label for="empNetSalary">الراتب الصافي</label>
-              <input type="number" step="any" class="form-control" id="empNetSalary" value="0" required>
-            </div>
-            <div class="form-group">
-              <label for="empAllowance">بدلات (إن وجدت)</label>
-              <input type="number" step="any" class="form-control" id="empAllowance" value="0" required>
-            </div>
-            <div class="form-group">
-              <label for="empDeduction">خصومات</label>
-              <input type="number" step="any" class="form-control" id="empDeduction" value="0" required>
-            </div>
-            <div class="form-group">
-              <label for="empBonus">إضافي (علاوات/مكافآت)</label>
-              <input type="number" step="any" class="form-control" id="empBonus" value="0" required>
-            </div>
-            <div class="form-group">
-              <label for="empMonth">الشهر</label>
-              <select class="select-control form-control" id="empMonth" required>
-                <option value="مايو">مايو</option>
-                <option value="يونيو">يونيو</option>
-                <option value="يوليو">يوليو</option>
-                <option value="يناير">يناير</option>
-                <option value="فبراير">فبراير</option>
-                <option value="مارس">مارس</option>
-                <option value="أبريل">أبريل</option>
-                <option value="أغسطس">أغسطس</option>
-                <option value="سبتمبر">سبتمبر</option>
-                <option value="أكتوبر">أكتوبر</option>
-                <option value="نوفمبر">نوفمبر</option>
-                <option value="ديسمبر">ديسمبر</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="empYear">السنة</label>
-              <input type="number" class="form-control" id="empYear" value="2026" required>
-            </div>
-          </div>
-          <div class="modal-footer" style="padding-right:0; padding-left:0; margin-top: 20px;">
-            <button type="button" class="btn btn-secondary" onclick="closeModal('employeeModal')">إلغاء</button>
-            <button type="submit" class="btn btn-primary" id="employeeFormBtn">حفظ البيانات</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn-new" id="scroll-top-btn" aria-label="العودة للأعلى">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-  <!-- JavaScript logic files -->
-  <script src="initialData.js?v=2"></script>
-  <script src="app.js?v=2"></script>
-  
-  <!-- Splash Screen Entry Automation Script -->
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const splash = document.getElementById("splash-screen");
-      const enterBtn = document.getElementById("enterBtn");
-      const logoImg = document.getElementById("splashLogoImg");
-
-      const exitSplash = () => {
-        splash.classList.add("fade-out");
-        setTimeout(() => {
-          splash.style.display = "none";
-        }, 800); // 800ms aligns with CSS fade-out transition duration
-      };
-
-      if (enterBtn) enterBtn.addEventListener("click", exitSplash);
-      if (logoImg) logoImg.addEventListener("click", exitSplash);
-    });
-  </script>
+    <!-- Scripts -->
+    <script src="projects.js?v=14"></script>
+    <script src="script.js?v=14"></script>
 </body>
 </html>

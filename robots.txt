@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://a01030108199-stack.github.io/portfolio/sitemap.xml
